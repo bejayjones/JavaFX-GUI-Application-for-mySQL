@@ -19,7 +19,7 @@
             <TableColumn fx:id="custPhoneNumber" prefWidth="75.0" text="%customer.phoneNumberColumn" />
         </columns>
       </TableView>
-      <TableView layoutX="56.0" layoutY="548.0" prefHeight="176.0" prefWidth="865.0">
+      <TableView fx:id="appointmentTable" layoutX="56.0" layoutY="548.0" prefHeight="176.0" prefWidth="865.0">
          <columns>
             <TableColumn fx:id="apptID" prefWidth="75.0" text="%appt.IDColumn" />
             <TableColumn fx:id="apptTitle" prefWidth="75.0" text="%appt.titleColumn" />

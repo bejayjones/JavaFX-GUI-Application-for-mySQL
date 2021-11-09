@@ -24,18 +24,15 @@ public class DBAppointments {
                 String appointmentDescription = rs.getString("Description");
                 String appointmentLocation = rs.getString("Location");
                 String appointmentType = rs.getString("Type");
-                String[] appointmentStartDateTime = rs.getString("Start").split(" ");
-                Date appointmentStartDate = Date.valueOf(appointmentStartDateTime[0]);
-                Time appointmentStartTime = Time.valueOf(appointmentStartDateTime[1]);
-                String[] appointmentEndDateTime = rs.getString("End").split(" ");
-                Date appointmentEndDate = Date.valueOf(appointmentEndDateTime[0]);
-                Time appointmentEndTime = Time.valueOf(appointmentEndDateTime[1]);
+                java.util.Date appointmentDate = rs.getDate("Start");
+                java.util.Date appointmentStart = rs.getTime("Start");
+                java.util.Date appointmentEnd = rs.getTime("End");
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
                 int contactId = rs.getInt("Contact_ID");
 
                 Appointments A = new Appointments(appointmentId, appointmentTitle, appointmentDescription, appointmentLocation,
-                        appointmentType, appointmentStartDate, appointmentStartTime, appointmentEndDate, appointmentEndTime,
+                        appointmentType, appointmentDate, appointmentStart, appointmentEnd,
                 customerId, userId, contactId);
                 alist.add(A);
             }
