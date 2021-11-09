@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.schedulingapp.AddCustomer">
+   <children>
+      <Label layoutX="123.0" layoutY="178.0" text="%ua.firstNameLabel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="164.0" layoutY="90.0" text="%ua.idLabel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="125.0" layoutY="266.0" text="%ua.lastNameLabel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="131.0" layoutY="358.0" text="%ua.dateLabel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="149.0" layoutY="467.0" text="%ua.timeLabel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField disable="true" layoutX="153.0" layoutY="137.0" promptText="%ua.idTextField" />
+      <TextField layoutX="153.0" layoutY="228.0" promptText="%ua.firstNameTextField" />
+      <TextField layoutX="153.0" layoutY="318.0" promptText="%ua.lastNameTextField" />
+      <TextField layoutX="151.0" layoutY="519.0" promptText="%ua.timeTextField" />
+      <Label layoutX="126.0" layoutY="29.0" text="%ua.titleLabel">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button layoutX="26.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="%ua.addButton">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="237.0" layoutY="661.0" mnemonicParsing="false" text="%ua.closeButton">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <DatePicker layoutX="138.0" layoutY="413.0" promptText="%ua.datePicker" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="750.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.schedulingapp.AddCustomer">
+   <children>
+      <Label layoutX="123.0" layoutY="178.0" text="%ac.firstNameLabel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="164.0" layoutY="90.0" text="%ac.idLabel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="125.0" layoutY="266.0" text="%ac.lastNameLabel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="131.0" layoutY="358.0" text="%ac.addressLabel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="131.0" layoutY="458.0" text="%ac.zipcodeLabel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="122.0" layoutY="562.0" text="%ac.phoneNumber">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField disable="true" layoutX="153.0" layoutY="137.0" promptText="%ac.idTextField" />
+      <TextField layoutX="153.0" layoutY="315.0" promptText="%ac.lastNameTextField" />
+      <TextField layoutX="153.0" layoutY="228.0" promptText="%ac.firstNameTextField" />
+      <TextField layoutX="153.0" layoutY="415.0" promptText="%ac.addressTextField" />
+      <TextField layoutX="151.0" layoutY="519.0" promptText="%ac.zipcodeTextField" />
+      <TextField layoutX="152.0" layoutY="615.0" promptText="%ac.phoneNumberTextField" />
+      <Label layoutX="126.0" layoutY="29.0" text="%ac.titleLabel">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button layoutX="26.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="%ac.addButton">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="237.0" layoutY="661.0" mnemonicParsing="false" text="%ac.closeButton">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
