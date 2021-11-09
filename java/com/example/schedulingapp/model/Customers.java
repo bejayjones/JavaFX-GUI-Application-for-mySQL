@@ -8,9 +8,7 @@ public class Customers {
     String customerAddress;
     String customerPhone;
     int customerDivisonId;
-    //git test
-    //git test 2
-
+    
     public Customers(int customerId, String customerName, String customerPostalCode, String customerAddress,
                      String customerPhone, int customerDivisionId) {
         this.customerId = customerId;
