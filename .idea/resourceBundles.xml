@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ResourceBundleManager">
+    <file url="file://$PROJECT_DIR$/src/resources/com/example/schedulingapp/home.properties" />
+    <file url="file://$PROJECT_DIR$/src/resources/com/example/schedulingapp/home_en_US.properties" />
+    <file url="file://$PROJECT_DIR$/src/resources/com/example/schedulingapp/home_fr_FR.properties" />
+    <file url="file://$PROJECT_DIR$/src/resources/com/example/schedulingapp/login.properties" />
+    <file url="file://$PROJECT_DIR$/src/resources/com/example/schedulingapp/login_en_US.properties" />
+    <file url="file://$PROJECT_DIR$/src/resources/com/example/schedulingapp/login_fr_FR.properties" />
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/resources/com/example/schedulingapp/home.properties" />
+      <file value="file://$PROJECT_DIR$/src/resources/com/example/schedulingapp/home_en_US.properties" />
+      <file value="file://$PROJECT_DIR$/src/resources/com/example/schedulingapp/home_fr_FR.properties" />
+      <base-name>home</base-name>
+    </custom-resource-bundle>
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/src/resources/com/example/schedulingapp/login.properties" />
+      <file value="file://$PROJECT_DIR$/src/resources/com/example/schedulingapp/login_en_US.properties" />
+      <file value="file://$PROJECT_DIR$/src/resources/com/example/schedulingapp/login_fr_FR.properties" />
+      <base-name>login</base-name>
+    </custom-resource-bundle>
+  </component>
+</project>

@@ -4,7 +4,6 @@ import com.example.schedulingapp.DBAccess.DBAppointments;
 import com.example.schedulingapp.DBAccess.DBCustomers;
 import com.example.schedulingapp.model.Appointments;
 import com.example.schedulingapp.model.Customers;
-import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.Date;
-import java.sql.Time;
 import java.util.ResourceBundle;
 
 public class homeController implements Initializable{
