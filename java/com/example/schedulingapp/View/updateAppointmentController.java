@@ -60,7 +60,7 @@ public class updateAppointmentController {
     }
 
     @FXML
-    void updateButtonClicked(ActionEvent event) {
+    void saveButtonClicked(ActionEvent event) {
 
     }
 

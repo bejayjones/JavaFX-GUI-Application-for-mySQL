@@ -38,7 +38,7 @@
             <Font size="33.0" />
          </font>
       </Label>
-      <Button fx:id="addButton" layoutX="14.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addButtonClicked" text="%aa.addButton">
+      <Button fx:id="saveButton" layoutX="14.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveButtonClicked" text="%aa.saveButton">
          <font>
             <Font size="24.0" />
          </font>

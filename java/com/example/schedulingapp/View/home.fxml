@@ -35,27 +35,27 @@
       </TableView>
       <StackPane layoutX="510.0" layoutY="167.0" prefHeight="67.0" prefWidth="232.0" />
       <StackPane layoutX="14.0" layoutY="167.0" prefHeight="67.0" prefWidth="232.0" />
-      <Button fx:id="addCustButton" layoutX="425.0" layoutY="266.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="%home.addCustButton">
+      <Button fx:id="addCustButton" layoutX="425.0" layoutY="266.0" mnemonicParsing="false" onAction="#addCustButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.addCustButton">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="updateCustButton" layoutX="592.0" layoutY="266.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="%home.updateCustButton">
+      <Button fx:id="updateCustButton" layoutX="592.0" layoutY="266.0" mnemonicParsing="false" onAction="#updateCustButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.updateCustButton">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="addApptButton" layoutX="425.0" layoutY="756.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="%home.addApptButton">
+      <Button fx:id="addApptButton" layoutX="425.0" layoutY="756.0" mnemonicParsing="false" onAction="#addApptButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.addApptButton">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="updateApptButton" layoutX="592.0" layoutY="756.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="%home.updateApptButton">
+      <Button fx:id="updateApptButton" layoutX="592.0" layoutY="756.0" mnemonicParsing="false" onAction="#updateApptButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.updateApptButton">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="deleteApptButton" layoutX="757.0" layoutY="756.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="%home.deleteApptButton">
+      <Button fx:id="deleteApptButton" layoutX="757.0" layoutY="756.0" mnemonicParsing="false" onAction="#deleteApptButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.deleteApptButton">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

@@ -6,16 +6,23 @@ import com.example.schedulingapp.model.Appointments;
 import com.example.schedulingapp.model.Customers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class homeController implements Initializable{
@@ -91,6 +98,101 @@ public class homeController implements Initializable{
 
     @FXML
     private Button deleteApptButton;
+
+    @FXML
+    void addApptButtonClicked(ActionEvent event) throws IOException {
+        Locale userLocale = Locale.getDefault();
+        Locale localeEN = new Locale("en_us");
+        Locale localeFR = new Locale("fr_fr");
+
+        ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.appointment", userLocale);
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(getClass().getResource("addAppointment.fxml"), bundle);
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        System.out.println(userLocale.getLanguage());
+        if (userLocale.getLanguage().equals("en")) {
+            stage.setTitle("Add Appointment");
+        }
+        else if(userLocale.getLanguage().equals("fr")){
+            stage.setTitle("ajouter un rendez-vous");
+        }
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+
+    @FXML
+    void addCustButtonClicked(ActionEvent event) throws IOException {
+        Locale userLocale = Locale.getDefault();
+        Locale localeEN = new Locale("en_us");
+        Locale localeFR = new Locale("fr_fr");
+
+        ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.customer", userLocale);
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(getClass().getResource("addCustomer.fxml"), bundle);
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        System.out.println(userLocale.getLanguage());
+        if (userLocale.getLanguage().equals("en")) {
+            stage.setTitle("Add Customer");
+        }
+        else if(userLocale.getLanguage().equals("fr")){
+            stage.setTitle("ajouter un client");
+        }
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void deleteApptButtonClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void updateApptButtonClicked(ActionEvent event) throws IOException {
+        Locale userLocale = Locale.getDefault();
+        Locale localeEN = new Locale("en_us");
+        Locale localeFR = new Locale("fr_fr");
+
+        ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.appointment", userLocale);
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(getClass().getResource("updateAppointment.fxml"), bundle);
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        System.out.println(userLocale.getLanguage());
+        if (userLocale.getLanguage().equals("en")) {
+            stage.setTitle("Update Appointment");
+        }
+        else if(userLocale.getLanguage().equals("fr")){
+            stage.setTitle("rendez-vous de mise à jour");
+        }
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void updateCustButtonClicked(ActionEvent event) throws IOException {
+        Locale userLocale = Locale.getDefault();
+        Locale localeEN = new Locale("en_us");
+        Locale localeFR = new Locale("fr_fr");
+
+        ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.customer", userLocale);
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(getClass().getResource("addCustomer.fxml"), bundle);
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        System.out.println(userLocale.getLanguage());
+        if (userLocale.getLanguage().equals("en")) {
+            stage.setTitle("Update Customer");
+        }
+        else if(userLocale.getLanguage().equals("fr")){
+            stage.setTitle("mettre à jour le client");
+        }
+        stage.setScene(scene);
+        stage.show();
+    }
 
     private ObservableList customerList = FXCollections.observableArrayList();
     private ObservableList appointmentList = FXCollections.observableArrayList();

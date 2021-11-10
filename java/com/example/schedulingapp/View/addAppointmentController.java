@@ -2,12 +2,16 @@ package com.example.schedulingapp.View;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-public class addAppointmentController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class addAppointmentController implements Initializable {
 
     @FXML
     private TextField idTextField;
@@ -55,7 +59,7 @@ public class addAppointmentController {
     private TextField userIdTextField;
 
     @FXML
-    void addButtonClicked(ActionEvent event) {
+    void saveButtonClicked(ActionEvent event) {
 
     }
 
@@ -64,4 +68,8 @@ public class addAppointmentController {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }
