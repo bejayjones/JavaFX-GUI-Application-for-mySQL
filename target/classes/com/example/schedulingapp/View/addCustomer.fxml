@@ -60,12 +60,12 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <ComboBox fx:id="stateCombo" layoutX="244.0" layoutY="566.0" prefWidth="175.0" promptText="%ac.stateLabel" visibleRowCount="68" />
+      <ComboBox fx:id="stateCombo" layoutX="244.0" layoutY="566.0" onAction="#stateSelected" prefWidth="175.0" promptText="%ac.stateLabel" />
       <Label alignment="CENTER" layoutY="489.0" prefWidth="450.0" text="%ac.firstLevelLabel" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ComboBox fx:id="countryCombo" layoutX="29.0" layoutY="566.0" prefWidth="175.0" promptText="%ac.countryLabel" visibleRowCount="3" />
+      <ComboBox fx:id="countryCombo" layoutX="29.0" layoutY="566.0" onAction="#countrySelected" prefWidth="175.0" promptText="%ac.countryLabel" visibleRowCount="3" />
    </children>
 </AnchorPane>

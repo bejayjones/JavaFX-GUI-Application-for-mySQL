@@ -193,9 +193,12 @@ public class homeController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
+    public static void addCustomer(Customers c){
+        customerList.add(c);
+    }
 
-    private ObservableList customerList = FXCollections.observableArrayList();
-    private ObservableList appointmentList = FXCollections.observableArrayList();
+    private static ObservableList customerList = FXCollections.observableArrayList();
+    private static ObservableList appointmentList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

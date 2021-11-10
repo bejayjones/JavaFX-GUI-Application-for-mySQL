@@ -2,7 +2,7 @@ package com.example.schedulingapp.model;
 
 public class Customers {
 
-    int customerId;
+    static int customerId;
     String customerName;
     String customerPostalCode;
     String customerAddress;
@@ -20,6 +20,7 @@ public class Customers {
 
     }
     public int getCustomerId(){
+
         return customerId;
     }
 

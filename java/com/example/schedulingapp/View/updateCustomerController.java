@@ -1,12 +1,20 @@
 package com.example.schedulingapp.View;
 
+import com.example.schedulingapp.DBAccess.DBfirstLevelDivison;
+import com.example.schedulingapp.model.firstLevelDivision;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-public class updateCustomerController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class updateCustomerController implements Initializable {
 
     @FXML
     private TextField idTextField;
@@ -27,19 +35,19 @@ public class updateCustomerController {
     private TextField phoneNumberTextField;
 
     @FXML
-    private Button addButton;
+    private Button saveButton;
 
     @FXML
     private Button closeButton;
 
     @FXML
-    private ComboBox<?> stateCombo;
+    private ComboBox<String> stateCombo;
 
     @FXML
-    private ComboBox<?> countryCombo;
+    private ComboBox<String> countryCombo;
 
     @FXML
-    void addButtonClicked(ActionEvent event) {
+    void saveButtonClicked(ActionEvent event) {
 
     }
 
@@ -47,5 +55,48 @@ public class updateCustomerController {
     void closeButtonClicked(ActionEvent event) {
 
     }
+    private ObservableList<firstLevelDivision> allDivisionData = DBfirstLevelDivison.getAllFirstLevelDivision();
+    private ObservableList<String> firstLevelList = DBfirstLevelDivison.getAllDivisions();
+    private ObservableList<String> usStates = DBfirstLevelDivison.getStates();
+    private ObservableList<String> ukProvinces = DBfirstLevelDivison.getUKProvinces();
+    private ObservableList<String> canadaProvinces = DBfirstLevelDivison.getCanadaProvinces();
+    private ObservableList<String> countries = FXCollections.observableArrayList();
 
+    @FXML
+    void countrySelected(ActionEvent event){
+        if(countryCombo.getValue() == "Canada"){
+            stateCombo.setItems(canadaProvinces);
+        }
+        if(countryCombo.getValue() == "United Kingdom"){
+            stateCombo.setItems(ukProvinces);
+        }
+        if(countryCombo.getValue() == "United States"){
+            stateCombo.setItems(usStates);
+        }
+    }
+    @FXML
+    void stateSelected(ActionEvent event){
+        for(firstLevelDivision state : allDivisionData){
+
+            if(stateCombo.getValue().equals(state.getDivisionName())){
+                switch(state.getCountryId()){
+                    case 1:
+                        countryCombo.setValue("United States");
+                        break;
+                    case 2:
+                        countryCombo.setValue("United Kingdom");
+                        break;
+                    case 3:
+                        countryCombo.setValue("Canada");
+                        break;
+                }
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }
