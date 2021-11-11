@@ -1,21 +1,26 @@
 package com.example.schedulingapp.View;
 import com.example.schedulingapp.DBAccess.DBfirstLevelDivison;
 import com.example.schedulingapp.Database.DBUtil;
-import com.example.schedulingapp.model.Customers;
 import com.example.schedulingapp.model.firstLevelDivision;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class addCustomerController implements Initializable {
@@ -95,7 +100,7 @@ public class addCustomerController implements Initializable {
     }
 
     @FXML
-    void saveButtonClicked(ActionEvent event) {
+    void saveButtonClicked(ActionEvent event) throws IOException {
         String customerName = firstNameTextField.getText() + " " + lastNameTextField.getText();
         String customerPostalCode = zipcodeTextField.getText();
         String customerAddress = addressTextField.getText();
@@ -111,10 +116,32 @@ public class addCustomerController implements Initializable {
             ps.setInt(5, divisionId);
             ps.executeUpdate();
             ((Node) (event.getSource())).getScene().getWindow().hide();
+            goHome();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+
+    }
+    void goHome() throws IOException {
+        Stage stage = new Stage();
+        Locale userLocale = Locale.getDefault();
+        Locale localeEN = new Locale("en_us");
+        Locale localeFR = new Locale("fr_fr");
+
+        ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.home", userLocale);
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(getClass().getResource("home.fxml"), bundle);
+        Scene scene = new Scene(root);
+        System.out.println(userLocale.getLanguage());
+        if (userLocale.getLanguage().equals("en")) {
+            stage.setTitle("Customer / Appointment");
+        } else if (userLocale.getLanguage().equals("fr")) {
+            stage.setTitle("Client / Rendevouz");
+        }
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

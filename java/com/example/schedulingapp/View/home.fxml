@@ -70,5 +70,10 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
+      <Button fx:id="deleteCustButton" layoutX="757.0" layoutY="266.0" mnemonicParsing="false" onAction="#deleteCustButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.deleteCustButton">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -1,7 +1,7 @@
 package com.example.schedulingapp.View;
-
 import com.example.schedulingapp.DBAccess.DBAppointments;
 import com.example.schedulingapp.DBAccess.DBCustomers;
+import com.example.schedulingapp.Database.DBUtil;
 import com.example.schedulingapp.model.Appointments;
 import com.example.schedulingapp.model.Customers;
 import javafx.collections.FXCollections;
@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,6 +23,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -119,6 +122,7 @@ public class homeController implements Initializable{
         }
         stage.setScene(scene);
         stage.show();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
 
     }
 
@@ -143,6 +147,7 @@ public class homeController implements Initializable{
         }
         stage.setScene(scene);
         stage.show();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
@@ -170,6 +175,7 @@ public class homeController implements Initializable{
         }
         stage.setScene(scene);
         stage.show();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
@@ -192,8 +198,24 @@ public class homeController implements Initializable{
         }
         stage.setScene(scene);
         stage.show();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
-    public static void addCustomer(Customers c){
+    @FXML
+    void deleteCustButtonClicked(ActionEvent event){
+        Customers selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
+        try {
+            PreparedStatement ps = DBUtil.getConnection().prepareStatement("DELETE FROM client_schedule.customers WHERE Customer_ID = ?");
+            ps.setString(1, String.valueOf(selectedCustomer.getCustomerId()));
+            ps.executeUpdate();
+            setLists();
+            setTables();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    public void addCustomer(Customers c){
         customerList.add(c);
     }
 
