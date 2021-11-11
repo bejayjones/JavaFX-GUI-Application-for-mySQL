@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.schedulingapp.View.homeController">
+<AnchorPane prefHeight="632.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.schedulingapp.View.homeController">
    <children>
-      <TableView fx:id="customerTable" layoutX="49.0" layoutY="97.0" prefHeight="140.0" prefWidth="865.0">
+      <TableView fx:id="customerTable" layoutX="15.0" layoutY="49.0" prefHeight="140.0" prefWidth="763.0">
         <columns>
             <TableColumn fx:id="custID" prefWidth="75.0" text="%customer.IDColumn" />
             <TableColumn fx:id="custName" prefWidth="75.0" text="%customer.NameColumn" />
@@ -19,7 +19,7 @@
             <TableColumn fx:id="custPhoneNumber" prefWidth="75.0" text="%customer.phoneNumberColumn" />
         </columns>
       </TableView>
-      <TableView fx:id="appointmentTable" layoutX="56.0" layoutY="548.0" prefHeight="176.0" prefWidth="865.0">
+      <TableView fx:id="appointmentTable" layoutX="15.0" layoutY="354.0" prefHeight="176.0" prefWidth="763.0">
          <columns>
             <TableColumn fx:id="apptID" prefWidth="75.0" text="%appt.IDColumn" />
             <TableColumn fx:id="apptTitle" prefWidth="75.0" text="%appt.titleColumn" />
@@ -35,42 +35,42 @@
       </TableView>
       <StackPane layoutX="510.0" layoutY="167.0" prefHeight="67.0" prefWidth="232.0" />
       <StackPane layoutX="14.0" layoutY="167.0" prefHeight="67.0" prefWidth="232.0" />
-      <Button fx:id="addCustButton" layoutX="425.0" layoutY="266.0" mnemonicParsing="false" onAction="#addCustButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.addCustButton">
+      <Button fx:id="addCustButton" layoutX="296.0" layoutY="206.0" mnemonicParsing="false" onAction="#addCustButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.addCustButton">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="updateCustButton" layoutX="592.0" layoutY="266.0" mnemonicParsing="false" onAction="#updateCustButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.updateCustButton">
+      <Button fx:id="updateCustButton" layoutX="463.0" layoutY="206.0" mnemonicParsing="false" onAction="#updateCustButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.updateCustButton">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="addApptButton" layoutX="425.0" layoutY="756.0" mnemonicParsing="false" onAction="#addApptButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.addApptButton">
+      <Button fx:id="addApptButton" layoutX="296.0" layoutY="552.0" mnemonicParsing="false" onAction="#addApptButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.addApptButton">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="updateApptButton" layoutX="592.0" layoutY="756.0" mnemonicParsing="false" onAction="#updateApptButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.updateApptButton">
+      <Button fx:id="updateApptButton" layoutX="463.0" layoutY="552.0" mnemonicParsing="false" onAction="#updateApptButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.updateApptButton">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="deleteApptButton" layoutX="757.0" layoutY="756.0" mnemonicParsing="false" onAction="#deleteApptButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.deleteApptButton">
+      <Button fx:id="deleteApptButton" layoutX="628.0" layoutY="552.0" mnemonicParsing="false" onAction="#deleteApptButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.deleteApptButton">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Label fx:id="customersLabel" layoutX="49.0" layoutY="62.0" text="%home.customersLabel">
+      <Label fx:id="customersLabel" layoutX="15.0" layoutY="14.0" text="%home.customersLabel">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="appointmentsLabel" layoutX="49.0" layoutY="475.0" text="%home.appointmentsLabel">
+      <Label fx:id="appointmentsLabel" layoutX="14.0" layoutY="319.0" text="%home.appointmentsLabel">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="deleteCustButton" layoutX="757.0" layoutY="266.0" mnemonicParsing="false" onAction="#deleteCustButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.deleteCustButton">
+      <Button fx:id="deleteCustButton" layoutX="628.0" layoutY="206.0" mnemonicParsing="false" onAction="#deleteCustButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.deleteCustButton">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
