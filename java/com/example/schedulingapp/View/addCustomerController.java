@@ -1,5 +1,6 @@
 package com.example.schedulingapp.View;
 import com.example.schedulingapp.DBAccess.DBfirstLevelDivison;
+import com.example.schedulingapp.Database.DBUtil;
 import com.example.schedulingapp.model.Customers;
 import com.example.schedulingapp.model.firstLevelDivision;
 import javafx.collections.FXCollections;
@@ -7,11 +8,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class addCustomerController implements Initializable {
@@ -92,14 +96,25 @@ public class addCustomerController implements Initializable {
 
     @FXML
     void saveButtonClicked(ActionEvent event) {
-        int customerId = 0;
         String customerName = firstNameTextField.getText() + " " + lastNameTextField.getText();
         String customerPostalCode = zipcodeTextField.getText();
         String customerAddress = addressTextField.getText();
         String customerPhone = phoneNumberTextField.getText();
-        Customers C = new Customers(customerId, customerName, customerPostalCode, customerAddress,
-                customerPhone, divisionId);
-        homeController.addCustomer(C);
+        try {
+            PreparedStatement ps = DBUtil.getConnection().prepareStatement("INSERT INTO client_schedule.customers" +
+                    "(Customer_Name, Address, Postal_Code, Phone, Division_ID)" +
+                    " VALUES(?, ?, ?, ?, ?)");
+            ps.setString(1, customerName);
+            ps.setString(2, customerPostalCode);
+            ps.setString(3, customerAddress);
+            ps.setString(4, customerPhone);
+            ps.setInt(5, divisionId);
+            ps.executeUpdate();
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML

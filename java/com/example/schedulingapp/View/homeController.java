@@ -197,6 +197,18 @@ public class homeController implements Initializable{
         customerList.add(c);
     }
 
+    public static void setLists(){
+        customerList = null;
+        appointmentList = null;
+        customerList = DBCustomers.getAllCustomers();
+        appointmentList = DBAppointments.getAllAppointments();
+
+    }
+    public void setTables(){
+        appointmentTable.setItems(appointmentList);
+        customerTable.setItems(customerList);
+    }
+
     private static ObservableList customerList = FXCollections.observableArrayList();
     private static ObservableList appointmentList = FXCollections.observableArrayList();
 
@@ -207,8 +219,7 @@ public class homeController implements Initializable{
         custAddress.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
         custZipCode.setCellValueFactory(new PropertyValueFactory<>("customerPostalCode"));
         custPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("customerPhone"));
-        customerList = DBCustomers.getAllCustomers();
-        customerTable.setItems(customerList);
+
 
         apptID.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         apptTitle.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
@@ -220,9 +231,10 @@ public class homeController implements Initializable{
         apptcustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         apptUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
         apptContactId.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+        setLists();
+        setTables();
 
-        appointmentList = DBAppointments.getAllAppointments();
-        appointmentTable.setItems(appointmentList);
+
     }
 }
 

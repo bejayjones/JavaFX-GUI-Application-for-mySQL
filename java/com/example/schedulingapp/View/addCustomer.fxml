@@ -40,11 +40,13 @@
          </font>
       </Label>
       <TextField fx:id="idTextField" disable="true" layoutX="251.0" layoutY="95.0" promptText="%ac.idTextField" />
-      <TextField fx:id="lastNameTextField" layoutX="251.0" layoutY="218.0" promptText="%ac.lastNameTextField" />
       <TextField fx:id="firstNameTextField" layoutX="251.0" layoutY="155.0" promptText="%ac.firstNameTextField" />
+      <TextField fx:id="lastNameTextField" layoutX="251.0" layoutY="218.0" promptText="%ac.lastNameTextField" />
+      <TextField fx:id="phoneNumberTextField" layoutX="251.0" layoutY="280.0" promptText="%ac.phoneNumberTextField" />
       <TextField fx:id="addressTextField" layoutX="251.0" layoutY="340.0" promptText="%ac.addressTextField" />
       <TextField fx:id="zipcodeTextField" layoutX="251.0" layoutY="416.0" promptText="%ac.zipcodeTextField" />
-      <TextField fx:id="phoneNumberTextField" layoutX="251.0" layoutY="280.0" promptText="%ac.phoneNumberTextField" />
+      <ComboBox fx:id="countryCombo" layoutX="29.0" layoutY="566.0" onAction="#countrySelected" prefWidth="175.0" promptText="%ac.countryLabel" visibleRowCount="3" />
+      <ComboBox fx:id="stateCombo" layoutX="244.0" layoutY="566.0" onAction="#stateSelected" prefWidth="175.0" promptText="%ac.stateLabel" />
       <Label layoutX="126.0" layoutY="29.0" text="%ac.titleLabel">
          <font>
             <Font size="33.0" />
@@ -60,12 +62,10 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <ComboBox fx:id="stateCombo" layoutX="244.0" layoutY="566.0" onAction="#stateSelected" prefWidth="175.0" promptText="%ac.stateLabel" />
       <Label alignment="CENTER" layoutY="489.0" prefWidth="450.0" text="%ac.firstLevelLabel" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ComboBox fx:id="countryCombo" layoutX="29.0" layoutY="566.0" onAction="#countrySelected" prefWidth="175.0" promptText="%ac.countryLabel" visibleRowCount="3" />
    </children>
 </AnchorPane>
