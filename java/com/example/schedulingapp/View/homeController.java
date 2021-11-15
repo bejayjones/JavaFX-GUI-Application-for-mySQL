@@ -107,7 +107,7 @@ public class homeController implements Initializable{
         Locale userLocale = Locale.getDefault();
         Locale localeEN = new Locale("en_us");
         Locale localeFR = new Locale("fr_fr");
-
+        selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
         ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.appointment", userLocale);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("addAppointment.fxml"), bundle);
@@ -132,7 +132,7 @@ public class homeController implements Initializable{
         Locale userLocale = Locale.getDefault();
         Locale localeEN = new Locale("en_us");
         Locale localeFR = new Locale("fr_fr");
-
+        selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
         ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.customer", userLocale);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("addCustomer.fxml"), bundle);
@@ -152,15 +152,16 @@ public class homeController implements Initializable{
 
     @FXML
     void deleteApptButtonClicked(ActionEvent event) {
-
+        selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
     }
+
 
     @FXML
     void updateApptButtonClicked(ActionEvent event) throws IOException {
+        selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
         Locale userLocale = Locale.getDefault();
         Locale localeEN = new Locale("en_us");
         Locale localeFR = new Locale("fr_fr");
-
         ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.appointment", userLocale);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("updateAppointment.fxml"), bundle);
@@ -183,10 +184,10 @@ public class homeController implements Initializable{
         Locale userLocale = Locale.getDefault();
         Locale localeEN = new Locale("en_us");
         Locale localeFR = new Locale("fr_fr");
-
+        selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
         ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.customer", userLocale);
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(getClass().getResource("addCustomer.fxml"), bundle);
+        Parent root = fxmlLoader.load(getClass().getResource("updateCustomer.fxml"), bundle);
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         System.out.println(userLocale.getLanguage());
@@ -202,7 +203,7 @@ public class homeController implements Initializable{
     }
     @FXML
     void deleteCustButtonClicked(ActionEvent event){
-        Customers selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
+        selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
         try {
             PreparedStatement ps = DBUtil.getConnection().prepareStatement("DELETE FROM client_schedule.customers WHERE Customer_ID = ?");
             ps.setString(1, String.valueOf(selectedCustomer.getCustomerId()));
@@ -215,9 +216,6 @@ public class homeController implements Initializable{
 
 
     }
-    public void addCustomer(Customers c){
-        customerList.add(c);
-    }
 
     public static void setLists(){
         customerList = null;
@@ -229,6 +227,14 @@ public class homeController implements Initializable{
     public void setTables(){
         appointmentTable.setItems(appointmentList);
         customerTable.setItems(customerList);
+    }
+    private static Customers selectedCustomer;
+    private static Appointments selectedAppointment;
+    public static Customers getSelectedCustomer(){
+        return selectedCustomer;
+    }
+    public static Appointments getSelectedAppointment(){
+        return selectedAppointment;
     }
 
     private static ObservableList customerList = FXCollections.observableArrayList();

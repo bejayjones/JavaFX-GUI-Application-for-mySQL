@@ -145,8 +145,9 @@ public class addCustomerController implements Initializable {
     }
 
     @FXML
-    void closeButtonClicked(ActionEvent event) {
-
+    void closeButtonClicked(ActionEvent event) throws IOException {
+        goHome();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
 
