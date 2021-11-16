@@ -49,7 +49,6 @@
          </font>
       </Button>
       <DatePicker fx:id="dateWidget" layoutX="139.0" layoutY="348.0" />
-      <ComboBox fx:id="startMinuteCombo" editable="true" layoutX="82.0" layoutY="418.0" prefHeight="25.0" prefWidth="56.0" promptText="00" visibleRowCount="4" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="383.0" prefHeight="35.0" prefWidth="225.0" text="%aa.startLabel" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font size="24.0" />
@@ -60,14 +59,13 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ComboBox fx:id="endMinuteCombo" editable="true" layoutX="299.0" layoutY="418.0" prefHeight="25.0" prefWidth="56.0" promptText="00" visibleRowCount="4" />
-      <ComboBox fx:id="endHourCombo" editable="true" layoutX="245.0" layoutY="418.0" prefHeight="25.0" prefWidth="56.0" promptText="10" visibleRowCount="14" />
+      <ComboBox fx:id="endHourCombo" editable="true" layoutX="293.0" layoutY="418.0" prefHeight="25.0" prefWidth="83.0" promptText="10:00" visibleRowCount="8" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="473.0" prefHeight="35.0" prefWidth="225.0" text="%aa.customerIdLabel" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ComboBox fx:id="startHourCombo" editable="true" layoutX="29.0" layoutY="418.0" prefHeight="25.0" prefWidth="56.0" promptText="8" visibleRowCount="14" />
+      <ComboBox fx:id="startHourCombo" editable="true" layoutX="74.0" layoutY="418.0" prefHeight="25.0" prefWidth="83.0" promptText="08:00" visibleRowCount="8" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="522.0" prefHeight="35.0" prefWidth="225.0" text="%aa.contactIdLabel" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font size="24.0" />
@@ -78,10 +76,8 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ComboBox fx:id="startMeridiemCombo" layoutX="138.0" layoutY="418.0" prefHeight="25.0" prefWidth="67.0" promptText="AM" visibleRowCount="2" />
-      <ComboBox fx:id="endMeridiemCombo" layoutX="355.0" layoutY="418.0" prefHeight="25.0" prefWidth="67.0" promptText="PM" visibleRowCount="2" />
-      <TextField fx:id="customerIdTextField" layoutX="266.0" layoutY="478.0" prefHeight="25.0" prefWidth="67.0" />
-      <TextField fx:id="contactIdTextField" layoutX="266.0" layoutY="527.0" prefHeight="25.0" prefWidth="67.0" />
-      <TextField fx:id="userIdTextField" layoutX="266.0" layoutY="578.0" prefHeight="25.0" prefWidth="67.0" />
+      <ComboBox fx:id="customerIdComboBox" layoutX="266.0" layoutY="478.0" prefHeight="25.0" prefWidth="67.0" visibleRowCount="5" />
+      <ComboBox fx:id="contactIdComboBox" layoutX="266.0" layoutY="527.0" prefHeight="25.0" prefWidth="67.0" visibleRowCount="5" />
+      <ComboBox fx:id="userIdComboBox" layoutX="266.0" layoutY="578.0" prefHeight="25.0" prefWidth="67.0" visibleRowCount="5" />
    </children>
 </AnchorPane>

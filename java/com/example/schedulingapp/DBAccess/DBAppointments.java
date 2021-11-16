@@ -7,6 +7,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class DBAppointments {
     public static ObservableList<Appointments> getAllAppointments() {
@@ -24,15 +33,39 @@ public class DBAppointments {
                 String appointmentDescription = rs.getString("Description");
                 String appointmentLocation = rs.getString("Location");
                 String appointmentType = rs.getString("Type");
-                java.util.Date appointmentDate = rs.getDate("Start");
-                java.util.Date appointmentStart = rs.getTime("Start");
-                java.util.Date appointmentEnd = rs.getTime("End");
+                String startDateUTC = rs.getString("Start");
+                String endDateUTC = rs.getString("End");
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
                 int contactId = rs.getInt("Contact_ID");
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime appointmentStartDT = LocalDateTime.parse(startDateUTC, dateTimeFormatter);
+                LocalDateTime appointmentEndDT = LocalDateTime.parse(endDateUTC, dateTimeFormatter);
+                String appointmentStartUTC = appointmentStartDT.toString().replace('T', ' ');
+                String appointmentEndUTC = appointmentEndDT.toString().replace('T', ' ');
+                String appointmentStart = "";
+                String appointmentEnd = "";
+                try {
+
+                    DateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    utcFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    Date utcTime = utcFormat.parse(appointmentStartUTC);
+                    System.out.println(utcTime);
+
+                    DateFormat localFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    localFormat.setTimeZone(TimeZone.getDefault());
+                    appointmentStart = localFormat.format(utcTime);
+
+                    utcTime = utcFormat.parse(appointmentEndUTC);
+                    appointmentEnd = localFormat.format(utcTime);
+
+                }
+                catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
                 Appointments A = new Appointments(appointmentId, appointmentTitle, appointmentDescription, appointmentLocation,
-                        appointmentType, appointmentDate, appointmentStart, appointmentEnd,
+                        appointmentType, appointmentStart, appointmentEnd,
                 customerId, userId, contactId);
                 alist.add(A);
             }

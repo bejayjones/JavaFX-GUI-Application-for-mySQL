@@ -25,6 +25,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -61,13 +62,10 @@ public class homeController implements Initializable{
     private TableColumn<Appointments, String> apptType;
 
     @FXML
-    private TableColumn<Appointments, Date> apptDate;
+    private TableColumn<Appointments, String> apptStart;
 
     @FXML
-    private TableColumn<Appointments, Date> apptStart;
-
-    @FXML
-    private TableColumn<Appointments, Date> apptEnd;
+    private TableColumn<Appointments, String> apptEnd;
 
     @FXML
     private TableColumn<Appointments, String> apptDescription;
@@ -252,9 +250,8 @@ public class homeController implements Initializable{
         apptID.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         apptTitle.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
         apptType.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
-        apptDate.setCellValueFactory(new PropertyValueFactory<>("appointmentDate"));
-        apptStart.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
-        apptEnd.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
+        apptStart.setCellValueFactory(new PropertyValueFactory<>("appointmentStartDate"));
+        apptEnd.setCellValueFactory(new PropertyValueFactory<>("appointmentEndDate"));
         apptDescription.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
         apptcustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         apptUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));

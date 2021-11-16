@@ -24,7 +24,6 @@
             <TableColumn fx:id="apptID" prefWidth="75.0" text="%appt.IDColumn" />
             <TableColumn fx:id="apptTitle" prefWidth="75.0" text="%appt.titleColumn" />
             <TableColumn fx:id="apptType" prefWidth="75.0" text="%appt.typeColumn" />
-            <TableColumn fx:id="apptDate" prefWidth="75.0" text="%appt.dateColumn" />
             <TableColumn fx:id="apptStart" prefWidth="75.0" text="%appt.startColumn" />
             <TableColumn fx:id="apptEnd" prefWidth="75.0" text="%appt.endColumn" />
             <TableColumn fx:id="apptDescription" prefWidth="75.0" text="%appt.descriptionColumn" />

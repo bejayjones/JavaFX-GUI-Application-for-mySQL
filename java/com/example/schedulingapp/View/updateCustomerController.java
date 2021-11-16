@@ -63,15 +63,16 @@ public class updateCustomerController implements Initializable {
         String customerPostalCode = zipcodeTextField.getText();
         String customerAddress = addressTextField.getText();
         String customerPhone = phoneNumberTextField.getText();
+        int customerId = Integer.parseInt(idTextField.getText());
         try {
-            PreparedStatement ps = DBUtil.getConnection().prepareStatement("INSERT INTO client_schedule.customers" +
-                    "(Customer_Name, Address, Postal_Code, Phone, Division_ID)" +
-                    " VALUES(?, ?, ?, ?, ?)");
+            PreparedStatement ps = DBUtil.getConnection().prepareStatement("UPDATE client_schedule.customers" +
+                    " SET Customer_Name = ?, Postal_Code = ?, Address = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?");
             ps.setString(1, customerName);
             ps.setString(2, customerPostalCode);
             ps.setString(3, customerAddress);
             ps.setString(4, customerPhone);
             ps.setInt(5, divisionId);
+            ps.setInt(6, customerId);
             ps.executeUpdate();
             ((Node) (event.getSource())).getScene().getWindow().hide();
             goHome();
@@ -149,6 +150,11 @@ public class updateCustomerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        stateCombo.setItems(firstLevelList);
+        countries.add("Canada");
+        countries.add("United Kingdom");
+        countries.add("United States");
+        countryCombo.setItems(countries);
         Customers selectedCustomer = homeController.getSelectedCustomer();
         String[] name = selectedCustomer.getCustomerName().split(" ");
         idTextField.setText(String.valueOf(selectedCustomer.getCustomerId()));
@@ -157,6 +163,7 @@ public class updateCustomerController implements Initializable {
         zipcodeTextField.setText(String.valueOf(selectedCustomer.getCustomerPostalCode()));
         addressTextField.setText(String.valueOf(selectedCustomer.getCustomerAddress()));
         phoneNumberTextField.setText(String.valueOf(selectedCustomer.getCustomerPhone()));
+        divisionId = selectedCustomer.getCustomerDivisonId();
         for(firstLevelDivision state : allDivisionData){
             if(selectedCustomer.getCustomerDivisonId() == state.getDivisionId()){
                 stateCombo.setValue(state.getDivisionName());

@@ -1,6 +1,7 @@
 package com.example.schedulingapp.model;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Appointments {
@@ -9,25 +10,25 @@ public class Appointments {
     private String appointmentDescription;
     private String appointmentLocation;
     private String appointmentType;
-    private Date appointmentDate;
-    private Date appointmentStart;
-    private Date appointmentEnd;
+    //private Date appointmentDate;
+    private String appointmentStartDate;
+    private String appointmentEndDate;
     private int customerId;
     private int userId;
     private int contactId;
 
     public Appointments(int appointmentId, String appointmentTitle, String appointmentDescription, String appointmentLocation,
-                        String appointmentType, Date appointmentDate, Date appointmentStart,
-                        Date appointmentEnd, int customerId, int userId, int contactId) {
+                        String appointmentType, String appointmentStartDate,
+                        String appointmentEndDate, int customerId, int userId, int contactId) {
 
         this.appointmentId = appointmentId;
         this.appointmentTitle = appointmentTitle;
         this.appointmentDescription = appointmentDescription;
         this.appointmentLocation = appointmentLocation;
         this.appointmentType = appointmentType;
-        this.appointmentDate = appointmentDate;
-        this.appointmentStart = appointmentStart;
-        this.appointmentEnd = appointmentEnd;
+        //this.appointmentDate = appointmentDate;
+        this.appointmentStartDate = appointmentStartDate;
+        this.appointmentEndDate = appointmentEndDate;
         this.customerId = customerId;
         this.userId = userId;
         this.contactId = contactId;
@@ -74,28 +75,20 @@ public class Appointments {
         this.appointmentType = appointmentType;
     }
 
-    public Date getAppointmentDate() {
-        return appointmentDate;
+    public String getAppointmentStartDate() {
+        return appointmentStartDate;
     }
 
-    public void setAppointmentDate(Date appointmentStartDate) {
-        this.appointmentDate = appointmentStartDate;
+    public void setAppointmentStartDate(String appointmentStart) {
+        this.appointmentStartDate = appointmentStartDate;
     }
 
-    public Date getAppointmentStart() {
-        return appointmentStart;
+    public String getAppointmentEndDate() {
+        return appointmentEndDate;
     }
 
-    public void setAppointmentStart(Date appointmentStart) {
-        this.appointmentStart = appointmentStart;
-    }
-
-    public Date getAppointmentEnd() {
-        return appointmentEnd;
-    }
-
-    public void setAppointmentEnd(Date appointmentEndTime) {
-        this.appointmentEnd = appointmentEnd;
+    public void setAppointmentEndDate(String appointmentEndTime) {
+        this.appointmentEndDate = appointmentEndDate;
     }
 
     public int getCustomerId() {
