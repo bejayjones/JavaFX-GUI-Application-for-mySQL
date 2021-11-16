@@ -151,6 +151,15 @@ public class homeController implements Initializable{
     @FXML
     void deleteApptButtonClicked(ActionEvent event) {
         selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
+        try {
+            PreparedStatement ps = DBUtil.getConnection().prepareStatement("DELETE FROM client_schedule.appointments WHERE Appointment_ID = ?");
+            ps.setString(1, String.valueOf(selectedAppointment.getAppointmentId()));
+            ps.executeUpdate();
+            setLists();
+            setTables();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -202,6 +211,14 @@ public class homeController implements Initializable{
     @FXML
     void deleteCustButtonClicked(ActionEvent event){
         selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
+        try{
+            PreparedStatement ps = DBUtil.getConnection().prepareStatement("DELETE FROM client_schedule.appointments WHERE Customer_ID = ?");
+            ps.setString(1, String.valueOf(selectedCustomer.getCustomerId()));
+            ps.executeUpdate();
+        } catch(SQLException e){
+
+        }
+
         try {
             PreparedStatement ps = DBUtil.getConnection().prepareStatement("DELETE FROM client_schedule.customers WHERE Customer_ID = ?");
             ps.setString(1, String.valueOf(selectedCustomer.getCustomerId()));
