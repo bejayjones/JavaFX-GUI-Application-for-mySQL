@@ -41,7 +41,7 @@ public class updateAppointmentController implements Initializable {
     private TextField idTextField;
 
     @FXML
-    private TextField typeTextField;
+    private ComboBox<String> typeComboBox;
 
     @FXML
     private TextField descriptionTextField;
@@ -82,7 +82,7 @@ public class updateAppointmentController implements Initializable {
     void saveButtonClicked(ActionEvent event) throws ParseException {
         String appointmentId = idTextField.getText();
         String title = "title";
-        String appointmentType = typeTextField.getText();
+        String appointmentType = typeComboBox.getValue();
         String appointmentDescription = descriptionTextField.getText();
         String appointmentLocation = "location";
         String appointmentDate = dateWidget.getValue().toString();
@@ -243,7 +243,7 @@ public class updateAppointmentController implements Initializable {
         contactIdComboBox.setItems(contactIdList);
         userIdComboBox.setItems(userIdList);
         idTextField.setText(String.valueOf(homeController.getSelectedAppointment().getAppointmentId()));
-        typeTextField.setText(homeController.getSelectedAppointment().getAppointmentType());
+        typeComboBox.setValue(homeController.getSelectedAppointment().getAppointmentType());
         descriptionTextField.setText(homeController.getSelectedAppointment().getAppointmentDescription());
         String startDateTime[] = homeController.getSelectedAppointment().getAppointmentStartDate().split(" ");
         String endDateTime[] = homeController.getSelectedAppointment().getAppointmentEndDate().split(" ");
@@ -253,5 +253,8 @@ public class updateAppointmentController implements Initializable {
         customerIdComboBox.setValue(homeController.getSelectedAppointment().getCustomerId());
         contactIdComboBox.setValue(homeController.getSelectedAppointment().getContactId());
         userIdComboBox.setValue(homeController.getSelectedAppointment().getUserId());
+        ObservableList<String> typeItems = FXCollections.observableArrayList();
+        typeItems.addAll("Planning Session", "De-Briefing", "Miscellaneous");
+        typeComboBox.setItems(typeItems);
     }
 }

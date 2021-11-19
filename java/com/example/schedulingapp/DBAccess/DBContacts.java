@@ -22,7 +22,8 @@ public class DBContacts {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 int contactId = rs.getInt("Contact_ID");
-                Contacts C = new Contacts(contactId);
+                String contactName = rs.getString("Contact_Name");
+                Contacts C = new Contacts(contactId, contactName);
                 clist.add(C);
 
             }

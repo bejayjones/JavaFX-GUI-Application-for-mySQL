@@ -31,7 +31,6 @@
          </font>
       </Label>
       <TextField fx:id="idTextField" disable="true" layoutX="154.0" layoutY="125.0" promptText="%aa.idTextField" />
-      <TextField fx:id="typeTextField" layoutX="151.0" layoutY="201.0" promptText="%aa.typeTextField" />
       <TextField fx:id="descriptionTextField" layoutX="151.0" layoutY="281.0" promptText="%aa.descriptionTextField" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutY="29.0" prefWidth="450.0" text="%aa.mainTitleLabel">
          <font>
@@ -79,5 +78,6 @@
       <ComboBox fx:id="customerIdComboBox" layoutX="266.0" layoutY="478.0" prefHeight="25.0" prefWidth="67.0" visibleRowCount="5" />
       <ComboBox fx:id="contactIdComboBox" layoutX="266.0" layoutY="527.0" prefHeight="25.0" prefWidth="67.0" visibleRowCount="5" />
       <ComboBox fx:id="userIdComboBox" layoutX="266.0" layoutY="578.0" prefHeight="25.0" prefWidth="67.0" visibleRowCount="5" />
+      <ComboBox fx:id="typeComboBox" layoutX="150.0" layoutY="201.0" prefWidth="150.0" visibleRowCount="3" />
    </children>
 </AnchorPane>

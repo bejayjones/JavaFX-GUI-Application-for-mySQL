@@ -13,10 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -26,6 +23,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -101,6 +99,22 @@ public class homeController implements Initializable{
     private Button deleteApptButton;
 
     @FXML
+    private RadioButton monthlyRadioButton;
+
+    @FXML
+    private ToggleGroup schedule;
+
+    @FXML
+    private RadioButton weeklyRadioButton;
+
+    @FXML
+    private RadioButton allRadioButton;
+
+    public static ObservableList<Appointments> getAppointmentList() {
+        return appointmentList;
+    }
+
+    @FXML
     void addApptButtonClicked(ActionEvent event) throws IOException {
         Locale userLocale = Locale.getDefault();
         Locale localeEN = new Locale("en_us");
@@ -150,18 +164,27 @@ public class homeController implements Initializable{
 
     @FXML
     void deleteApptButtonClicked(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
+        alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> deleteAppt());
+    }
+    void deleteAppt(){
         selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
-        try {
+        String aptId = String.valueOf(selectedAppointment.getAppointmentId());
+        String aptType = selectedAppointment.getAppointmentType();
+        String message = "Appointment: " + aptId + " Type: " + aptType + " has been cancelled";
+        try{
             PreparedStatement ps = DBUtil.getConnection().prepareStatement("DELETE FROM client_schedule.appointments WHERE Appointment_ID = ?");
             ps.setString(1, String.valueOf(selectedAppointment.getAppointmentId()));
             ps.executeUpdate();
             setLists();
             setTables();
-        } catch (SQLException e) {
+
+        } catch(SQLException e){
             e.printStackTrace();
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
+        alert.show();
     }
-
 
     @FXML
     void updateApptButtonClicked(ActionEvent event) throws IOException {
@@ -231,6 +254,44 @@ public class homeController implements Initializable{
 
 
     }
+    @FXML
+    void monthlyRadioButtonSelected(ActionEvent event){
+        ObservableList<Appointments> monthlyAppointments = FXCollections.observableArrayList();
+        for(Appointments A : appointmentList){
+
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime start = LocalDateTime.parse(A.getAppointmentStartDate(), dateTimeFormatter);
+            LocalDateTime now = LocalDateTime.now();
+            if(start.isAfter(now) && start.isBefore(now.plusHours(730))) {
+                monthlyAppointments.add(A);
+                System.out.println("Added");
+                System.out.println(now);
+            }
+        }
+        appointmentTable.setItems(null);
+        appointmentTable.setItems(monthlyAppointments);
+    }
+    @FXML
+    void weeklyRadioButtonSelected(ActionEvent event){
+        ObservableList<Appointments> weeklyAppointment = FXCollections.observableArrayList();
+        for(Appointments A : appointmentList){
+
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime start = LocalDateTime.parse(A.getAppointmentStartDate(), dateTimeFormatter);
+            LocalDateTime now = LocalDateTime.now();
+            if(start.isAfter(now) && start.isBefore(now.plusHours(168))) {
+                weeklyAppointment.add(A);
+                System.out.println("Added");
+                System.out.println(now);
+            }
+        }
+        appointmentTable.setItems(null);
+        appointmentTable.setItems(weeklyAppointment);
+    }
+    @FXML
+    void allRadioButtonSelected(ActionEvent event){
+        setTables();
+    }
 
     public static void setLists(){
         customerList = null;
@@ -252,8 +313,41 @@ public class homeController implements Initializable{
         return selectedAppointment;
     }
 
+    public static void checkForAppointment(){
+        LocalDateTime now = LocalDateTime.now();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        int check = 0;
+        for(Appointments A : appointmentList){
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime aStartTime = LocalDateTime.parse(A.getAppointmentStartDate(), dateTimeFormatter);
+            if(aStartTime.isAfter(now) && aStartTime.isBefore(now.plusMinutes(15))){
+                alert.setHeaderText("There is an appointment within 15 minutes!");
+                alert.setContentText("Appointment ID: " + A.getAppointmentId() + "\n Time: " + A.getAppointmentStartDate());
+                alert.showAndWait();
+                check++;
+            }
+            else{
+
+            }
+        }
+        if(check == 0) {
+            alert.setHeaderText("No upcoming appointments");
+            alert.showAndWait();
+        }
+    }
+    @FXML
+    void reportsButtonClicked() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(getClass().getResource("reports.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
     private static ObservableList customerList = FXCollections.observableArrayList();
-    private static ObservableList appointmentList = FXCollections.observableArrayList();
+    private static ObservableList<Appointments> appointmentList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -275,8 +369,6 @@ public class homeController implements Initializable{
         apptContactId.setCellValueFactory(new PropertyValueFactory<>("contactId"));
         setLists();
         setTables();
-
-
     }
 }
 

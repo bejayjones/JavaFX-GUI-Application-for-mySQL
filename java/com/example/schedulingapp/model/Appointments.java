@@ -10,7 +10,6 @@ public class Appointments {
     private String appointmentDescription;
     private String appointmentLocation;
     private String appointmentType;
-    //private Date appointmentDate;
     private String appointmentStartDate;
     private String appointmentEndDate;
     private int customerId;
@@ -26,7 +25,6 @@ public class Appointments {
         this.appointmentDescription = appointmentDescription;
         this.appointmentLocation = appointmentLocation;
         this.appointmentType = appointmentType;
-        //this.appointmentDate = appointmentDate;
         this.appointmentStartDate = appointmentStartDate;
         this.appointmentEndDate = appointmentEndDate;
         this.customerId = customerId;

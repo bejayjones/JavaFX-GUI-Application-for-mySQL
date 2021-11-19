@@ -2,8 +2,10 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
@@ -70,6 +72,18 @@
          </font>
       </Label>
       <Button fx:id="deleteCustButton" layoutX="628.0" layoutY="206.0" mnemonicParsing="false" onAction="#deleteCustButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.deleteCustButton">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <RadioButton fx:id="monthlyRadioButton" layoutX="517.0" layoutY="323.0" mnemonicParsing="false" onAction="#monthlyRadioButtonSelected" text="Monthly Schedule">
+         <toggleGroup>
+            <ToggleGroup fx:id="schedule" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="weeklyRadioButton" layoutX="641.0" layoutY="323.0" mnemonicParsing="false" onAction="#weeklyRadioButtonSelected" text="Weekly Schedule" toggleGroup="$schedule" />
+      <RadioButton fx:id="allRadioButton" layoutX="474.0" layoutY="323.0" mnemonicParsing="false" onAction="#allRadioButtonSelected" text="All" toggleGroup="$schedule" />
+      <Button fx:id="reportsButton" layoutX="42.0" layoutY="552.0" mnemonicParsing="false" onAction="#reportsButtonClicked" prefHeight="50.0" prefWidth="150.0" text="%home.reportsButton">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
