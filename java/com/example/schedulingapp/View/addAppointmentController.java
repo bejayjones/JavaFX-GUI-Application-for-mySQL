@@ -27,7 +27,6 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -35,38 +34,50 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
+/**
+ * addAppointmentController responsible for logic surrounding the
+ * process of adding an appointment to the MySQL database
+ */
 public class addAppointmentController implements Initializable {
 
-    @FXML
-    private TextField idTextField;
-
+    /**
+     * combobox that holds the type options
+     */
     @FXML
     private ComboBox<String> typeComboBox;
-
+    /**
+     * textfield used to collect appointment description
+     */
     @FXML
     private TextField descriptionTextField;
-
-    @FXML
-    private Button addButton;
-
-    @FXML
-    private Button closeButton;
-
+    /**
+     * datepicker widget that collects the date for an added appointment
+     */
     @FXML
     private DatePicker dateWidget;
-
+    /**
+     * combo box that allows a user to select and end time
+     */
     @FXML
     private ComboBox<String> endHourCombo;
-
+    /**
+     * combo box that allows a user to select a start time
+     */
     @FXML
     private ComboBox<String> startHourCombo;
-
+    /**
+     * combo box that lets a user select a customer id
+     */
     @FXML
     private ComboBox<Integer> customerIdComboBox;
-
+    /**
+     * combo box that lets a user select a contact id
+     */
     @FXML
     private ComboBox<Integer> contactIdComboBox;
-
+    /**
+     * combo box that lets a user select a user id
+     */
     @FXML
     private ComboBox<Integer> userIdComboBox;
 
@@ -78,6 +89,12 @@ public class addAppointmentController implements Initializable {
     private ObservableList<Integer> contactIdList = FXCollections.observableArrayList();
     private ObservableList<Integer> userIdList = FXCollections.observableArrayList();
 
+    /**
+     * method that checks input, converts time to UTC then adds a new appointment the the mySQL database
+     * checks to ensure that a new appointment does not overlap with an existing appointment
+     * @param event
+     * @throws ParseException
+     */
     @FXML
     void saveButtonClicked(ActionEvent event) throws ParseException {
         ObservableList<Appointments> apptList = homeController.getAppointmentList();
@@ -137,17 +154,18 @@ public class addAppointmentController implements Initializable {
             }
         }
     }
+
+    /**
+     * returns the user to the home view
+     * @throws IOException
+     */
     void goHome() throws IOException {
         Stage stage = new Stage();
         Locale userLocale = Locale.getDefault();
-        Locale localeEN = new Locale("en_us");
-        Locale localeFR = new Locale("fr_fr");
-
         ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.home", userLocale);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("home.fxml"), bundle);
         Scene scene = new Scene(root);
-        System.out.println(userLocale.getLanguage());
         if (userLocale.getLanguage().equals("en")) {
             stage.setTitle("Customer / Appointment");
         } else if (userLocale.getLanguage().equals("fr")) {
@@ -157,11 +175,29 @@ public class addAppointmentController implements Initializable {
         stage.show();
     }
 
-
+    /**
+     * confirms that the user wants to cancel, then sends the user back to the home view
+     * @param event
+     */
     @FXML
     void closeButtonClicked(ActionEvent event) {
-
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel adding a new Appointment?");
+        alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {
+            try {
+                goHome();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
+
+    /**
+     * converts local time from the users selection to UTC
+     * @param local
+     * @return
+     * @throws ParseException
+     */
     String localToUTC(String local) throws ParseException {
         String utc = "";
 
@@ -176,7 +212,10 @@ public class addAppointmentController implements Initializable {
 
         return utc;
     }
-
+    /**
+     * converts UTC time options into the users local time
+     * @throws ParseException
+     */
     void convertListTime() throws ParseException {
         try {
             for (String time : startTimeListEST) {
@@ -201,6 +240,11 @@ public class addAppointmentController implements Initializable {
 
     }
 
+    /**
+     * populates combo boxes so the user can make selections
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         startTimeListEST.addAll(

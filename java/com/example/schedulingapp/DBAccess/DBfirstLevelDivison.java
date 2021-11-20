@@ -16,11 +16,8 @@ public class DBfirstLevelDivison {
 
         ObservableList<firstLevelDivision> flist = FXCollections.observableArrayList();
         try {
-
             String sql = "SELECT * from first_level_divisions";
-
             PreparedStatement ps = DBUtil.getConnection().prepareStatement(sql);
-
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 int divisionId = rs.getInt("Division_ID");
@@ -28,7 +25,6 @@ public class DBfirstLevelDivison {
                 int countryId = rs.getInt("Country_ID");
                 firstLevelDivision F = new firstLevelDivision(divisionId, divisionName, countryId);
                 flist.add(F);
-
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

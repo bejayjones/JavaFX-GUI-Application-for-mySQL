@@ -16,11 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,38 +35,49 @@ import java.util.TimeZone;
 
 public class updateAppointmentController implements Initializable {
 
-    @FXML
-    private TextField idTextField;
-
+    /**
+     * combobox that holds the type options
+     */
     @FXML
     private ComboBox<String> typeComboBox;
-
+    /**
+     * textfield used to collect appointment description
+     */
     @FXML
     private TextField descriptionTextField;
-
-    @FXML
-    private Button addButton;
-
-    @FXML
-    private Button closeButton;
-
+    /**
+     * datepicker widget that collects the date for an added appointment
+     */
     @FXML
     private DatePicker dateWidget;
-
+    /**
+     * combo box that allows a user to select and end time
+     */
     @FXML
     private ComboBox<String> endHourCombo;
-
+    /**
+     * combo box that allows a user to select a start time
+     */
     @FXML
     private ComboBox<String> startHourCombo;
-
+    /**
+     * combo box that lets a user select a customer id
+     */
     @FXML
     private ComboBox<Integer> customerIdComboBox;
-
+    /**
+     * combo box that lets a user select a contact id
+     */
     @FXML
     private ComboBox<Integer> contactIdComboBox;
-
+    /**
+     * combo box that lets a user select a user id
+     */
     @FXML
     private ComboBox<Integer> userIdComboBox;
+
+    @FXML
+    private TextField idTextField;
 
     private ObservableList<String> startTimeListEST = FXCollections.observableArrayList();
     private ObservableList<String> endTimeListEST = FXCollections.observableArrayList();
@@ -78,6 +87,11 @@ public class updateAppointmentController implements Initializable {
     private ObservableList<Integer> contactIdList = FXCollections.observableArrayList();
     private ObservableList<Integer> userIdList = FXCollections.observableArrayList();
 
+    /**
+     * checks for input validation, then updates the selected appointment in the mysql database
+     * @param event
+     * @throws ParseException
+     */
     @FXML
     void saveButtonClicked(ActionEvent event) throws ParseException {
         String appointmentId = idTextField.getText();
@@ -111,7 +125,6 @@ public class updateAppointmentController implements Initializable {
             ps.setInt(8, userId);
             ps.setInt(9, contactId);
             ps.setString(10, appointmentId);
-            System.out.println(ps);
             ps.executeUpdate();
             ((Node) (event.getSource())).getScene().getWindow().hide();
             goHome();
@@ -120,12 +133,14 @@ public class updateAppointmentController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * returns the user back to the home view
+     * @throws IOException
+     */
     void goHome() throws IOException {
         Stage stage = new Stage();
         Locale userLocale = Locale.getDefault();
-        Locale localeEN = new Locale("en_us");
-        Locale localeFR = new Locale("fr_fr");
-
         ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.home", userLocale);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("home.fxml"), bundle);
@@ -139,13 +154,28 @@ public class updateAppointmentController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-
+    /**
+     * confirms that the user wants to cancel, then sends the user back to the home view
+     * @param event
+     */
     @FXML
-    void closeButtonClicked(ActionEvent event) throws IOException {
-        goHome();
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+    void closeButtonClicked(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel updating this Appointment?");
+        alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {
+            try {
+                goHome();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
+    /**
+     * converts local time from the users selection to UTC
+     * @param local
+     * @return
+     * @throws ParseException
+     */
     String localToUTC(String local) throws ParseException {
         String utc = "";
 
@@ -160,7 +190,10 @@ public class updateAppointmentController implements Initializable {
 
         return utc;
     }
-
+    /**
+     * converts UTC time options into the users local time
+     * @throws ParseException
+     */
     void convertListTime() throws ParseException {
         try {
             for (String time : startTimeListEST) {
@@ -185,6 +218,12 @@ public class updateAppointmentController implements Initializable {
 
     }
 
+    /**
+     * intializes the update appointment view by setting the combo boxes as well as populating the
+     * text fields and combo boxes and datepicker with the information gathered from the selected appointments
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         startTimeListEST.addAll(

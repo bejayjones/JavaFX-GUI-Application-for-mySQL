@@ -12,7 +12,6 @@ import java.sql.SQLException;
 
 public class DBUsers {
     public static ObservableList<Users> getAllUsers() {
-
         ObservableList<Users> ulist = FXCollections.observableArrayList();
         try {
             String sql = "SELECT * from users";
@@ -22,7 +21,6 @@ public class DBUsers {
                 int userId = rs.getInt("User_ID");
                 Users U = new Users(userId);
                 ulist.add(U);
-
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

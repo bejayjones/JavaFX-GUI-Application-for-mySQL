@@ -15,9 +15,7 @@ public class DBReports {
         ObservableList<Reports> rlist = FXCollections.observableArrayList();
         try {
             String sql = "SELECT month(START), year(START), Type, count(*) as ct FROM client_schedule.appointments GROUP BY Type, month(START), year(START);";
-
             PreparedStatement ps = DBUtil.getConnection().prepareStatement(sql);
-
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 int month = rs.getInt("month(START)");
@@ -26,7 +24,6 @@ public class DBReports {
                 int count = rs.getInt("ct");
                 Reports R = new Reports(month, year, type, count);
                 rlist.add(R);
-
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -50,7 +47,6 @@ public class DBReports {
         } catch (SQLException throwables){
             throwables.printStackTrace();
         }
-
         return rlist;
     }
 }

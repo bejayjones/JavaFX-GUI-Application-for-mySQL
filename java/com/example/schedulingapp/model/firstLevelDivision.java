@@ -11,7 +11,6 @@ public class firstLevelDivision {
         this.divisionName = divisionName;
         this.countryId = countryId;
     }
-
     public int getDivisionId() {
         return divisionId;
     }

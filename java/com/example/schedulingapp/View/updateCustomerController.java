@@ -13,9 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,37 +24,50 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class updateCustomerController implements Initializable {
+    /**
+     * textfield used to gather last name from user
+     */
+    @FXML
+    private TextField lastNameTextField;
+    /**
+     * textfield used to gather first name from user
+     */
+    @FXML
+    private TextField firstNameTextField;
+    /**
+     * textfield used to gather address from user
+     */
+    @FXML
+    private TextField addressTextField;
+    /**
+     * textfield used to gather zipcode from user
+     */
+    @FXML
+    private TextField zipcodeTextField;
+    /**
+     * textfield used to gather phone number from user
+     */
+    @FXML
+    private TextField phoneNumberTextField;
+    /**
+     * combo box that lets user select a state
+     */
+    @FXML
+    private ComboBox<String> stateCombo;
+    /**
+     * combo box that lets user select a country
+     */
+    @FXML
+    private ComboBox<String> countryCombo;
 
     @FXML
     private TextField idTextField;
 
-    @FXML
-    private TextField lastNameTextField;
-
-    @FXML
-    private TextField firstNameTextField;
-
-    @FXML
-    private TextField addressTextField;
-
-    @FXML
-    private TextField zipcodeTextField;
-
-    @FXML
-    private TextField phoneNumberTextField;
-
-    @FXML
-    private Button saveButton;
-
-    @FXML
-    private Button closeButton;
-
-    @FXML
-    private ComboBox<String> stateCombo;
-
-    @FXML
-    private ComboBox<String> countryCombo;
-
+    /**
+     * checks for input validation, then updates the select customer with the input data
+     * in the mysql database
+     * @param event
+     */
     @FXML
     void saveButtonClicked(ActionEvent event) {
         String customerName = firstNameTextField.getText() + " " + lastNameTextField.getText();
@@ -80,25 +91,37 @@ public class updateCustomerController implements Initializable {
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
-
     }
-
+    /**
+     * Confirms that the user wants to cancel the addition process and then returns user back to
+     * home view
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void closeButtonClicked(ActionEvent event) throws IOException {
-        goHome();
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel updating this Customer?");
+        alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {
+            try {
+                goHome();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
+
+    /**
+     * returns the user back the home view
+     * @throws IOException
+     */
     void goHome() throws IOException {
         Stage stage = new Stage();
         Locale userLocale = Locale.getDefault();
-        Locale localeEN = new Locale("en_us");
-        Locale localeFR = new Locale("fr_fr");
-
         ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.home", userLocale);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("home.fxml"), bundle);
         Scene scene = new Scene(root);
-        System.out.println(userLocale.getLanguage());
         if (userLocale.getLanguage().equals("en")) {
             stage.setTitle("Customer / Appointment");
         } else if (userLocale.getLanguage().equals("fr")) {
@@ -115,6 +138,10 @@ public class updateCustomerController implements Initializable {
     private ObservableList<String> countries = FXCollections.observableArrayList();
     private int divisionId;
 
+    /**
+     * populates the state combo box based on the selection of the country combo box
+     * @param event
+     */
     @FXML
     void countrySelected(ActionEvent event){
         if(countryCombo.getValue() == "Canada"){
@@ -127,6 +154,11 @@ public class updateCustomerController implements Initializable {
             stateCombo.setItems(usStates);
         }
     }
+
+    /**
+     * populates the country combo box based on the selection of the state combo box
+     * @param event
+     */
     @FXML
     void stateSelected(ActionEvent event){
         for(firstLevelDivision state : allDivisionData){
@@ -148,6 +180,12 @@ public class updateCustomerController implements Initializable {
         }
     }
 
+    /**
+     * initializes the update customer screen by populating the textfields and combo boxes with the data
+     * from the selected customer
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         stateCombo.setItems(firstLevelList);

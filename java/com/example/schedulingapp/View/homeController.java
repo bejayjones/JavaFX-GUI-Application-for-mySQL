@@ -16,10 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -27,6 +25,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * homeController classes responsible for the logic of displaying tables and user options
+ */
 public class homeController implements Initializable{
 
     @FXML
@@ -77,55 +78,28 @@ public class homeController implements Initializable{
     @FXML
     private TableColumn<Appointments, Integer> apptContactId;
 
-    @FXML
-    private Label appointmentsLabel;
-
-    @FXML
-    private Label customersLabel;
-
-    @FXML
-    private Button addCustButton;
-
-    @FXML
-    private Button updateCustButton;
-
-    @FXML
-    private Button addApptButton;
-
-    @FXML
-    private Button updateApptButton;
-
-    @FXML
-    private Button deleteApptButton;
-
-    @FXML
-    private RadioButton monthlyRadioButton;
-
-    @FXML
-    private ToggleGroup schedule;
-
-    @FXML
-    private RadioButton weeklyRadioButton;
-
-    @FXML
-    private RadioButton allRadioButton;
-
+    /**
+     * method used to return the list of appointments
+     * @return appointmentList
+     */
     public static ObservableList<Appointments> getAppointmentList() {
         return appointmentList;
     }
 
+    /**
+     * opens the add appointment view
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void addApptButtonClicked(ActionEvent event) throws IOException {
         Locale userLocale = Locale.getDefault();
-        Locale localeEN = new Locale("en_us");
-        Locale localeFR = new Locale("fr_fr");
         selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
         ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.appointment", userLocale);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("addAppointment.fxml"), bundle);
         Scene scene = new Scene(root);
         Stage stage = new Stage();
-        System.out.println(userLocale.getLanguage());
         if (userLocale.getLanguage().equals("en")) {
             stage.setTitle("Add Appointment");
         }
@@ -138,7 +112,11 @@ public class homeController implements Initializable{
 
     }
 
-
+    /**
+     * opens the add customer view
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void addCustButtonClicked(ActionEvent event) throws IOException {
         Locale userLocale = Locale.getDefault();
@@ -150,7 +128,6 @@ public class homeController implements Initializable{
         Parent root = fxmlLoader.load(getClass().getResource("addCustomer.fxml"), bundle);
         Scene scene = new Scene(root);
         Stage stage = new Stage();
-        System.out.println(userLocale.getLanguage());
         if (userLocale.getLanguage().equals("en")) {
             stage.setTitle("Add Customer");
         }
@@ -162,13 +139,31 @@ public class homeController implements Initializable{
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
+    /**
+     * confirms that the user wants to delete the selected appointment
+     * LAMBDA EXPRESSION: I used a lambda expression in this method for my alerts so that it passes the user response
+     * into a lambda expression to decide whether to delete the appointment or not
+     * @param event
+     */
     @FXML
     void deleteApptButtonClicked(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
-        alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> deleteAppt());
+        if(appointmentTable.getSelectionModel().getSelectedItem() != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
+            alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> deleteAppt());
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You must select an appointment first");
+            alert.show();
+        }
     }
+
+    /**
+     * deletes the selected appointment
+     */
     void deleteAppt(){
         selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
+
         String aptId = String.valueOf(selectedAppointment.getAppointmentId());
         String aptType = selectedAppointment.getAppointmentType();
         String message = "Appointment: " + aptId + " Type: " + aptType + " has been cancelled";
@@ -178,7 +173,6 @@ public class homeController implements Initializable{
             ps.executeUpdate();
             setLists();
             setTables();
-
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -186,18 +180,20 @@ public class homeController implements Initializable{
         alert.show();
     }
 
+    /**
+     * opens the update appointment view and sets the selected appointment so that the next view can access it
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void updateApptButtonClicked(ActionEvent event) throws IOException {
         selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
         Locale userLocale = Locale.getDefault();
-        Locale localeEN = new Locale("en_us");
-        Locale localeFR = new Locale("fr_fr");
         ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.appointment", userLocale);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("updateAppointment.fxml"), bundle);
         Scene scene = new Scene(root);
         Stage stage = new Stage();
-        System.out.println(userLocale.getLanguage());
         if (userLocale.getLanguage().equals("en")) {
             stage.setTitle("Update Appointment");
         }
@@ -209,18 +205,20 @@ public class homeController implements Initializable{
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
+    /**
+     * opens the update Customer view and sets the selected customer so the view can access it
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void updateCustButtonClicked(ActionEvent event) throws IOException {
         Locale userLocale = Locale.getDefault();
-        Locale localeEN = new Locale("en_us");
-        Locale localeFR = new Locale("fr_fr");
         selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
         ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.customer", userLocale);
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("updateCustomer.fxml"), bundle);
         Scene scene = new Scene(root);
         Stage stage = new Stage();
-        System.out.println(userLocale.getLanguage());
         if (userLocale.getLanguage().equals("en")) {
             stage.setTitle("Update Customer");
         }
@@ -231,8 +229,30 @@ public class homeController implements Initializable{
         stage.show();
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
+
+    /**
+     * confirms that the user wants to delete the selected customer
+     * LAMBDA EXPRESSION: I used a lambda expression in this method for my alerts so that it passes the user response
+     * into a lambda expression to decide whether to delete the customer or not
+     * @param event
+     */
     @FXML
     void deleteCustButtonClicked(ActionEvent event){
+        if(customerTable.getSelectionModel().getSelectedItem() != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this customer?");
+            alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> deleteCustomer());
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You must select an customer first");
+            alert.show();
+        }
+    }
+
+    /**
+     * deletes the selected customer
+     */
+    void deleteCustomer(){
         selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
         try{
             PreparedStatement ps = DBUtil.getConnection().prepareStatement("DELETE FROM client_schedule.appointments WHERE Customer_ID = ?");
@@ -251,9 +271,12 @@ public class homeController implements Initializable{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
+
+    /**
+     * changes the appointment table to display all the appointments in the upcoming 30 days
+     * @param event
+     */
     @FXML
     void monthlyRadioButtonSelected(ActionEvent event){
         ObservableList<Appointments> monthlyAppointments = FXCollections.observableArrayList();
@@ -264,13 +287,16 @@ public class homeController implements Initializable{
             LocalDateTime now = LocalDateTime.now();
             if(start.isAfter(now) && start.isBefore(now.plusHours(730))) {
                 monthlyAppointments.add(A);
-                System.out.println("Added");
-                System.out.println(now);
             }
         }
         appointmentTable.setItems(null);
         appointmentTable.setItems(monthlyAppointments);
     }
+
+    /**
+     * changes the appointment table to display all the appointments in the upcoming 7 days
+     * @param event
+     */
     @FXML
     void weeklyRadioButtonSelected(ActionEvent event){
         ObservableList<Appointments> weeklyAppointment = FXCollections.observableArrayList();
@@ -281,18 +307,24 @@ public class homeController implements Initializable{
             LocalDateTime now = LocalDateTime.now();
             if(start.isAfter(now) && start.isBefore(now.plusHours(168))) {
                 weeklyAppointment.add(A);
-                System.out.println("Added");
-                System.out.println(now);
             }
         }
         appointmentTable.setItems(null);
         appointmentTable.setItems(weeklyAppointment);
     }
+
+    /**
+     * resets the appointment table so that all appointments are displayed
+     * @param event
+     */
     @FXML
     void allRadioButtonSelected(ActionEvent event){
         setTables();
     }
 
+    /**
+     * refreshes the appointment lists
+     */
     public static void setLists(){
         customerList = null;
         appointmentList = null;
@@ -300,19 +332,35 @@ public class homeController implements Initializable{
         appointmentList = DBAppointments.getAllAppointments();
 
     }
+
+    /**
+     * refreshes the tables
+     */
     public void setTables(){
         appointmentTable.setItems(appointmentList);
         customerTable.setItems(customerList);
     }
     private static Customers selectedCustomer;
     private static Appointments selectedAppointment;
+
+    /**
+     * @return selectedCustomer
+     */
     public static Customers getSelectedCustomer(){
         return selectedCustomer;
     }
+
+    /**
+     *
+     * @return selectedAppointment
+     */
     public static Appointments getSelectedAppointment(){
         return selectedAppointment;
     }
 
+    /**
+     * checks to see if there is an appointment within the next 15 minutes
+     */
     public static void checkForAppointment(){
         LocalDateTime now = LocalDateTime.now();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -335,6 +383,11 @@ public class homeController implements Initializable{
             alert.showAndWait();
         }
     }
+
+    /**
+     * opens the reports view
+     * @throws IOException
+     */
     @FXML
     void reportsButtonClicked() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -349,6 +402,11 @@ public class homeController implements Initializable{
     private static ObservableList customerList = FXCollections.observableArrayList();
     private static ObservableList<Appointments> appointmentList = FXCollections.observableArrayList();
 
+    /**
+     * initializes the view so that the tables are populated with the corresponding data
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         custID.setCellValueFactory(new PropertyValueFactory<>("customerId"));

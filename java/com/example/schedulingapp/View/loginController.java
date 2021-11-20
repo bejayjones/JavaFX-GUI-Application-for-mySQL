@@ -10,28 +10,34 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.ResourceBundle;
+import java.io.IOException;
 
+/**
+ * Login controller class that controls the logic for the login view
+ */
 public class loginController implements Initializable {
-
     @FXML
     private AnchorPane loginPane;
 
     @FXML
     private Label loginLabel;
-
+    /**
+     * textfield used to collect username
+     */
     @FXML
     private TextField userNameField;
 
     @FXML
     private Label passWordLabel;
-
+    /**
+     * textfield used to collect password
+     */
     @FXML
     private PasswordField passWordField;
 
@@ -40,17 +46,25 @@ public class loginController implements Initializable {
 
     @FXML
     private Button loginButton;
-
+    /**
+     * label to display users timezone
+     */
     @FXML
     private Label loginTimeZoneLabel;
+
+    /**
+     * When button is clicked, check for correct username and password
+     * if correct, write to login_activity.txt, display home view
+     * if incorrect, write to login_activity.txt, throw wrong username/password alert
+     * @param event
+     * @throws IOException
+     */
     public void loginButtonOnAction(ActionEvent event) throws IOException {
-        String userName = "test";
-        String passWord = "test";
         String message = "Wrong username or password";
         String alertTitle = "Login failed";
         Locale userLocale = Locale.getDefault();
-        Locale localeEN = new Locale("en_us");
-        Locale localeFR = new Locale("fr_fr");
+        FileWriter fw = new FileWriter("login_activity.txt", true);
+        PrintWriter myWriter = new PrintWriter(fw);
 
             if (userNameField.getText().equals("test") && passWordField.getText().equals("test")) {
                 Stage stage = new Stage();
@@ -58,7 +72,8 @@ public class loginController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root = fxmlLoader.load(getClass().getResource("home.fxml"), bundle);
                 Scene scene = new Scene(root);
-                System.out.println(userLocale.getLanguage());
+                myWriter.println("LOGIN SUCCESSFUL" + LocalDateTime.now());
+                myWriter.close();
                 if (userLocale.getLanguage().equals("en")) {
                     stage.setTitle("Customer / Appointment");
 
@@ -71,6 +86,8 @@ public class loginController implements Initializable {
                 ((Node) (event.getSource())).getScene().getWindow().hide();
                 homeController.checkForAppointment();
             } else {
+                myWriter.println("LOGIN UNSUCCESSFUL" + LocalDateTime.now());
+                myWriter.close();
                 if (userLocale.getLanguage().equals("en")) {
 
                 } else if (userLocale.getLanguage().equals("fr")) {
@@ -85,6 +102,11 @@ public class loginController implements Initializable {
 
     }
 
+    /**
+     * initialize the view by displaying users timezone
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loginTimeZoneLabel.setText(ZoneId.systemDefault().toString());

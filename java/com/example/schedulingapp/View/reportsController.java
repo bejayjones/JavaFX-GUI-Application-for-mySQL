@@ -3,12 +3,9 @@ package com.example.schedulingapp.View;
 import com.example.schedulingapp.DBAccess.DBAppointments;
 import com.example.schedulingapp.DBAccess.DBContacts;
 import com.example.schedulingapp.DBAccess.DBReports;
-import com.example.schedulingapp.Database.DBUtil;
 import com.example.schedulingapp.model.Appointments;
 import com.example.schedulingapp.model.Contacts;
-import com.example.schedulingapp.model.Countries;
 import com.example.schedulingapp.model.Reports;
-import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,9 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class reportsController implements Initializable {
@@ -77,6 +71,9 @@ public class reportsController implements Initializable {
     @FXML
     private TableColumn<Reports, Integer> totalYearColumn;
 
+    /**
+     * sets the contact combo box for the third report
+     */
     public void setContactCombo(){
         for(Contacts C : contacts){
             contactNames.add(C.getContactName());
@@ -84,6 +81,9 @@ public class reportsController implements Initializable {
         contactCombo.setItems(contactNames);
     }
 
+    /**
+     * repopulates the third table with the appointments that include the selected contact
+     */
     @FXML
     void contactComboSelected(){
         String selectedContact = contactCombo.getValue();
@@ -101,6 +101,11 @@ public class reportsController implements Initializable {
     ObservableList<Contacts> contacts = DBContacts.getAllContacts();
     ObservableList<String> contactNames = FXCollections.observableArrayList();
 
+    /**
+     * initializes the reports view so that the tables are populated with the corresponding data
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         monthColumn.setCellValueFactory(new PropertyValueFactory<>("month"));
@@ -120,7 +125,6 @@ public class reportsController implements Initializable {
         totalYearColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
 
         setContactCombo();
-        //contactReport = DBAppointments.getAppointmentsByContact(1);
         report1.setItems(monthlyTypeReport);
         yearTable.setItems(yearlyReport);
         report2.setItems(contactReport);

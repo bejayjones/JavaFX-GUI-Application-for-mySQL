@@ -19,7 +19,6 @@ public class Appointments {
     public Appointments(int appointmentId, String appointmentTitle, String appointmentDescription, String appointmentLocation,
                         String appointmentType, String appointmentStartDate,
                         String appointmentEndDate, int customerId, int userId, int contactId) {
-
         this.appointmentId = appointmentId;
         this.appointmentTitle = appointmentTitle;
         this.appointmentDescription = appointmentDescription;
@@ -30,7 +29,6 @@ public class Appointments {
         this.customerId = customerId;
         this.userId = userId;
         this.contactId = contactId;
-
     }
 
     public int getAppointmentId() {

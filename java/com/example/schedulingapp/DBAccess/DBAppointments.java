@@ -51,7 +51,6 @@ public class DBAppointments {
                     DateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     utcFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
                     Date utcTime = utcFormat.parse(appointmentStartUTC);
-                    System.out.println(utcTime);
 
                     DateFormat localFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     localFormat.setTimeZone(TimeZone.getDefault());
@@ -107,11 +106,9 @@ public class DBAppointments {
                 String appointmentStart = "";
                 String appointmentEnd = "";
                 try {
-
                     DateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     utcFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
                     Date utcTime = utcFormat.parse(appointmentStartUTC);
-                    System.out.println(utcTime);
 
                     DateFormat localFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     localFormat.setTimeZone(TimeZone.getDefault());
@@ -119,7 +116,6 @@ public class DBAppointments {
 
                     utcTime = utcFormat.parse(appointmentEndUTC);
                     appointmentEnd = localFormat.format(utcTime);
-
                 }
                 catch (ParseException e) {
                     e.printStackTrace();

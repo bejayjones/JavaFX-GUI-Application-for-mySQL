@@ -23,7 +23,6 @@ public class main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("View/login.fxml"), bundle);
         Scene scene = new Scene(root);
-        System.out.println(userLocale.getLanguage());
         if (userLocale.getLanguage().equals("en")) {
             stage.setTitle("Login");
         }
