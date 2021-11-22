@@ -10,8 +10,8 @@ public class DBUtil {
     private static final String databaseName = "client_schedule";
     private static final String jdbcUrl = protocol + vendor + location + databaseName + "?ConnectionTimeZone = SERVER"; //LOCAL
     private static final String driver = "com.mysql.cj.jdbc.Driver"; //Driver reference
-    private static final String userName = "root"; //LabUser
-    private static final String password = "root"; // Password Passw0rd!
+    private static final String userName = "LabUser"; //LabUser
+    private static final String password = "Passw0rd!"; // Password Passw0rd!
     public static Connection connection; // Connection interface
 
     public static void openConnection(){
