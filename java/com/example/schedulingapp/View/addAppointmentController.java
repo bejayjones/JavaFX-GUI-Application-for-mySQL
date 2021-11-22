@@ -19,7 +19,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -120,8 +119,10 @@ public class addAppointmentController implements Initializable {
             LocalDateTime aEndTime = LocalDateTime.parse(A.getAppointmentEndDate(), dateTimeFormatter);
             LocalDateTime startTime = LocalDateTime.parse(startDate, dateTimeFormatter);
             LocalDateTime endTime = LocalDateTime.parse(endDate, dateTimeFormatter);
-            if(aStartTime.plusMinutes(1).isAfter(startTime) && aStartTime.isBefore(endTime)
-            || aEndTime.isAfter(startTime) && aEndTime.minusMinutes(1).isBefore(endTime)){
+            if(aStartTime.isBefore(startTime) && (aEndTime.isBefore(startTime) || (aStartTime.isAfter(endTime)))){
+
+            }
+            else{
                 doubleBooked = true;
             }
         }

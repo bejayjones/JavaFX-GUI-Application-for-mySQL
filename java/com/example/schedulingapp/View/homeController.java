@@ -120,8 +120,6 @@ public class homeController implements Initializable{
     @FXML
     void addCustButtonClicked(ActionEvent event) throws IOException {
         Locale userLocale = Locale.getDefault();
-        Locale localeEN = new Locale("en_us");
-        Locale localeFR = new Locale("fr_fr");
         selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
         ResourceBundle bundle = ResourceBundle.getBundle("com.example.schedulingapp.customer", userLocale);
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -141,7 +139,7 @@ public class homeController implements Initializable{
 
     /**
      * confirms that the user wants to delete the selected appointment
-     * LAMBDA EXPRESSION: I used a lambda expression in this method for my alerts so that it passes the user response
+     * @LAMBDA EXPRESSION: I used a lambda expression in this method for my alerts so that it passes the user response
      * into a lambda expression to decide whether to delete the appointment or not
      * @param event
      */
@@ -232,7 +230,7 @@ public class homeController implements Initializable{
 
     /**
      * confirms that the user wants to delete the selected customer
-     * LAMBDA EXPRESSION: I used a lambda expression in this method for my alerts so that it passes the user response
+     * @LAMBDA EXPRESSION: I used a lambda expression in this method for my alerts so that it passes the user response
      * into a lambda expression to decide whether to delete the customer or not
      * @param event
      */

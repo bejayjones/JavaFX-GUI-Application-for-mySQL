@@ -4,6 +4,7 @@ import com.example.schedulingapp.DBAccess.DBContacts;
 import com.example.schedulingapp.DBAccess.DBCustomers;
 import com.example.schedulingapp.DBAccess.DBUsers;
 import com.example.schedulingapp.Database.DBUtil;
+import com.example.schedulingapp.model.Appointments;
 import com.example.schedulingapp.model.Contacts;
 import com.example.schedulingapp.model.Customers;
 import com.example.schedulingapp.model.Users;
@@ -28,6 +29,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -91,9 +94,12 @@ public class updateAppointmentController implements Initializable {
      * checks for input validation, then updates the selected appointment in the mysql database
      * @param event
      * @throws ParseException
+     *
      */
     @FXML
     void saveButtonClicked(ActionEvent event) throws ParseException {
+        ObservableList<Appointments> apptList = homeController.getAppointmentList();
+        boolean doubleBooked = false;
         String appointmentId = idTextField.getText();
         String title = "title";
         String appointmentType = typeComboBox.getValue();
@@ -110,27 +116,45 @@ public class updateAppointmentController implements Initializable {
         String startDateUTC = localToUTC(startDate);
         String endDateUTC = localToUTC(endDate);
 
+        for (Appointments A : apptList) {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime aStartTime = LocalDateTime.parse(A.getAppointmentStartDate(), dateTimeFormatter);
+            LocalDateTime aEndTime = LocalDateTime.parse(A.getAppointmentEndDate(), dateTimeFormatter);
+            LocalDateTime startTime = LocalDateTime.parse(startDate, dateTimeFormatter);
+            LocalDateTime endTime = LocalDateTime.parse(endDate, dateTimeFormatter);
+            if ((aStartTime.isBefore(startTime) && (aEndTime.isBefore(startTime)) || (aStartTime.isAfter(endTime))) || appointmentId.equals(String.valueOf(A.getAppointmentId()))) {
 
-        try {
-            PreparedStatement ps = DBUtil.getConnection().prepareStatement("UPDATE client_schedule.appointments" +
-                    " SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ?" +
-                    " WHERE Appointment_ID = ?");
-            ps.setString(1, title);
-            ps.setString(2, appointmentDescription);
-            ps.setString(3, appointmentLocation);
-            ps.setString(4, appointmentType);
-            ps.setString(5, startDateUTC);
-            ps.setString(6, endDateUTC);
-            ps.setInt(7, customerId);
-            ps.setInt(8, userId);
-            ps.setInt(9, contactId);
-            ps.setString(10, appointmentId);
-            ps.executeUpdate();
-            ((Node) (event.getSource())).getScene().getWindow().hide();
-            goHome();
+            } else {
+                doubleBooked = true;
+            }
+        }
+        if (doubleBooked) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Double Booked");
+            alert.setHeaderText("Customer already has an appointment at this time");
+            alert.show();
+        } else {
+            try {
+                PreparedStatement ps = DBUtil.getConnection().prepareStatement("UPDATE client_schedule.appointments" +
+                        " SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ?" +
+                        " WHERE Appointment_ID = ?");
+                ps.setString(1, title);
+                ps.setString(2, appointmentDescription);
+                ps.setString(3, appointmentLocation);
+                ps.setString(4, appointmentType);
+                ps.setString(5, startDateUTC);
+                ps.setString(6, endDateUTC);
+                ps.setInt(7, customerId);
+                ps.setInt(8, userId);
+                ps.setInt(9, contactId);
+                ps.setString(10, appointmentId);
+                ps.executeUpdate();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
+                goHome();
 
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

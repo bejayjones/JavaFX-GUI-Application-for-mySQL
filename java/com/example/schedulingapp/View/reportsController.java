@@ -73,26 +73,28 @@ public class reportsController implements Initializable {
 
     /**
      * sets the contact combo box for the third report
+     * @LAMBDA Expression, instead of implementing a for loop, I use a lamba implementation, for each
+     * to populate the contact combo box list
      */
     public void setContactCombo(){
-        for(Contacts C : contacts){
-            contactNames.add(C.getContactName());
-        }
+        contacts.forEach(C -> contactNames.add(C.getContactName()));
         contactCombo.setItems(contactNames);
     }
 
     /**
      * repopulates the third table with the appointments that include the selected contact
+     * @LAMBDA Expression, using the lambda implementation of for each to populate the 2nd report
+     * instead of using a for loop
      */
     @FXML
     void contactComboSelected(){
         String selectedContact = contactCombo.getValue();
-        for(Contacts C : contacts){
-            if(selectedContact.equals(C.getContactName())){
+        contacts.forEach(C -> {
+            if (selectedContact.equals(C.getContactName())) {
                 contactReport = DBAppointments.getAppointmentsByContact(C.getContactId());
                 report2.setItems(contactReport);
             }
-        }
+        });
     }
 
     ObservableList<Reports> monthlyTypeReport = DBReports.getMonthlyTypeReport();
