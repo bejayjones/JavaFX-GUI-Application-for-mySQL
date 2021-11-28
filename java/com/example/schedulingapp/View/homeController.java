@@ -138,13 +138,13 @@ public class homeController implements Initializable{
     }
 
 
-    @FXML
     /**
      * confirms that the user wants to delete the selected appointment
      * LAMBDA EXPRESSION: I used a lambda expression in this method for my alerts so that it passes the user response
      * into a lambda expression to decide whether to delete the appointment or not
      * @param event
      */
+    @FXML
     void deleteApptButtonClicked(ActionEvent event) {
         if(appointmentTable.getSelectionModel().getSelectedItem() != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
