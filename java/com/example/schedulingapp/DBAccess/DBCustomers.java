@@ -7,9 +7,15 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 
-
+/**
+ * This class is responsible for taking information from the SQL database and passing it into a customer object
+ */
 public class DBCustomers {
-
+    /**
+     * This method uses a select statement and result set to take information from the sql database and passes
+     * it into a customer object
+     * @return a list of customer objects
+     */
     public static ObservableList<Customers> getAllCustomers() {
 
         ObservableList<Customers> clist = FXCollections.observableArrayList();

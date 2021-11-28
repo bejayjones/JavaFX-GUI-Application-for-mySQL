@@ -1,17 +1,21 @@
 package com.example.schedulingapp.DBAccess;
-
 import com.example.schedulingapp.Database.DBUtil;
 import com.example.schedulingapp.model.firstLevelDivision;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This class is responsible for taking information from the database and turning into java objects
+ */
 public class DBfirstLevelDivison {
-
+    /**
+     * This method uses a select statement and a result set to fetch the all the firstleveldivision data from the database
+     * and passes it into firstlevel division objects
+     * @return a list of firstleveldivision objects
+     */
     public static ObservableList<firstLevelDivision> getAllFirstLevelDivision() {
 
         ObservableList<firstLevelDivision> flist = FXCollections.observableArrayList();
@@ -31,6 +35,11 @@ public class DBfirstLevelDivison {
         }
         return flist;
     }
+
+    /**
+     *
+     * @return returns a list of states that belong to the country ID of 1
+     */
     public static ObservableList<String> getStates(){
         ObservableList<String> stateList = FXCollections.observableArrayList();
         ObservableList<firstLevelDivision> all = getAllFirstLevelDivision();
@@ -41,6 +50,10 @@ public class DBfirstLevelDivison {
         }
         return stateList;
     }
+    /**
+     *
+     * @return returns a list of states that belong to the country ID of 3
+     */
     public static ObservableList<String> getCanadaProvinces(){
         ObservableList<String> provinceList = FXCollections.observableArrayList();
         ObservableList<firstLevelDivision> all = getAllFirstLevelDivision();
@@ -52,6 +65,10 @@ public class DBfirstLevelDivison {
         }
         return provinceList;
     }
+    /**
+     *
+     * @return returns a list of states that belong to the country ID of 2
+     */
     public static ObservableList<String> getUKProvinces(){
         ObservableList<String> provinceList = FXCollections.observableArrayList();
         ObservableList<firstLevelDivision> all = getAllFirstLevelDivision();
@@ -62,6 +79,11 @@ public class DBfirstLevelDivison {
         }
         return provinceList;
     }
+
+    /**
+     *
+     * @return returns a the entire list of firstlevel divisions
+     */
     public static ObservableList<String> getAllDivisions(){
         ObservableList<String> stateList = FXCollections.observableArrayList();
         ObservableList<firstLevelDivision> all = getAllFirstLevelDivision();

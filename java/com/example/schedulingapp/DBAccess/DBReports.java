@@ -9,7 +9,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * this class is responsible for taking information from the database to generate specific reports
+ */
 public class DBReports {
+    /**
+     * uses a select statement and result set to gather the start month and year and type and frequency of appointments
+     * by month and type
+     * @return a list of appointments
+     */
     public static ObservableList<Reports> getMonthlyTypeReport() {
 
         ObservableList<Reports> rlist = FXCollections.observableArrayList();
@@ -30,6 +38,11 @@ public class DBReports {
         }
         return rlist;
     }
+
+    /**
+     * uses a select statement and result set to gather the start year and frequency of appointments by start year
+     * @return a list of appointments
+     */
     public static ObservableList<Reports> getYearlyReport(){
         ObservableList<Reports> rlist = FXCollections.observableArrayList();
         try{

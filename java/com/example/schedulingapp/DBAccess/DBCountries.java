@@ -7,9 +7,16 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 
-
+/**
+ * This class is responsible for fetching the countries from the SQL database and storing their ID and Name into a
+ * Countries object
+ */
 public class DBCountries {
-
+    /**
+     * this method uses a select statement and a result set to pass the information from the sql database into
+     * a countries object
+     * @return a list of country objects
+     */
     public static ObservableList<Countries> getAllCountries() {
 
         ObservableList<Countries> clist = FXCollections.observableArrayList();

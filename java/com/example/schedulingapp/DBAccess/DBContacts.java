@@ -10,7 +10,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This class is responsible for fetching the contacts from the SQL database and storing their ID and Name into a
+ * Contact object
+ */
 public class DBContacts {
+    /**
+     * This method uses a select statement and result set to store the contacts into a Contact object
+     * @return
+     */
     public static ObservableList<Contacts> getAllContacts() {
 
         ObservableList<Contacts> clist = FXCollections.observableArrayList();

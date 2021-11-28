@@ -73,7 +73,7 @@ public class reportsController implements Initializable {
 
     /**
      * sets the contact combo box for the third report
-     * @LAMBDA Expression, instead of implementing a for loop, I use a lamba implementation, for each
+     * LAMBDA Expression, instead of implementing a for loop, I use a lamba implementation, for each
      * to populate the contact combo box list
      */
     public void setContactCombo(){
@@ -83,7 +83,7 @@ public class reportsController implements Initializable {
 
     /**
      * repopulates the third table with the appointments that include the selected contact
-     * @LAMBDA Expression, using the lambda implementation of for each to populate the 2nd report
+     * LAMBDA Expression, using the lambda implementation of for each to populate the 2nd report
      * instead of using a for loop
      */
     @FXML

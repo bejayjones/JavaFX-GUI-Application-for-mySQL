@@ -17,7 +17,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.TimeZone;
 
+/**
+ * This class is responsible for retrieving result sets related to the appointment table in the mysql database
+ */
 public class DBAppointments {
+    /**
+     * This method uses a select staetment and a result set to get the entire list of appointments from the SQL database
+     * @return a list of appointments
+     */
     public static ObservableList<Appointments> getAllAppointments() {
 
         ObservableList<Appointments> alist = FXCollections.observableArrayList();
@@ -75,6 +82,13 @@ public class DBAppointments {
         }
         return alist;
     }
+
+    /**
+     * this class uses a select statement to create a result set from the appointments table to fetch appointments
+     * based on the contact ID passed as a parameter
+     * @param contact
+     * @return observable list that contains a list of appointments
+     */
     public static ObservableList<Appointments> getAppointmentsByContact(int contact) {
 
         ObservableList<Appointments> alist = FXCollections.observableArrayList();
